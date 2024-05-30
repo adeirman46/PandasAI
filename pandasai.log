@@ -1,0 +1,600 @@
+2024-05-30 13:09:08 [INFO] Question: plot pie chart with number of embark town people that survived
+2024-05-30 13:09:08 [INFO] Running PandasAI with local LLM...
+2024-05-30 13:09:08 [INFO] Prompt ID: 376d5639-d05d-45b5-9adc-78073f3dcb4a
+2024-05-30 13:09:08 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-05-30 13:09:08 [INFO] Executing Step 0: ValidatePipelineInput
+2024-05-30 13:09:08 [INFO] Executing Step 1: CacheLookup
+2024-05-30 13:09:08 [INFO] Executing Step 2: PromptGeneration
+2024-05-30 13:09:08 [INFO] Using prompt: <dataframe>
+dfs[0]:891x15
+survived,pclass,sex,age,sibsp,parch,fare,embarked,class,who,adult_male,deck,embark_town,alive,alone
+0,1,female,,5,3,71.2833,,First,woman,False,A,Southampton,no,False
+1,2,female,65.0,3,4,20.525,C,Third,child,True,,,yes,True
+0,3,male,33.0,1,5,8.3,Q,Second,man,False,E,Cherbourg,no,True
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ plot pie chart with number of embark town people that survived
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-05-30 13:09:08 [INFO] Executing Step 3: CodeGenerator
+2024-05-30 13:09:38 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-05-30 13:09:38 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:891x15
+survived,pclass,sex,age,sibsp,parch,fare,embarked,class,who,adult_male,deck,embark_town,alive,alone
+0,1,female,,5,3,71.2833,,First,woman,False,A,Southampton,no,False
+1,2,female,65.0,3,4,20.525,C,Third,child,True,,,yes,True
+0,3,male,33.0,1,5,8.3,Q,Second,man,False,E,Cherbourg,no,True
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ plot pie chart with number of embark town people that survived
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-05-30 13:09:38 [INFO] Code generated:
+            ```
+            import pandas as pd
+import matplotlib.pyplot as plt
+
+dfs = [pd.read_json(dataframe)]
+
+result = {}
+
+# Filter dataframe to get embark town people that survived
+survived_df = dfs[0][dfs[0]['embarked_town'] == 'Southampton'][dfs[0]['alive'] == 1]
+
+# Create pie chart
+plt.figure(figsize=(6,6))
+plt.pie(survived_df.groupby('adult_male')['alive'].count(), labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title("Number of Adult Males and Females that Survived from Southampton")
+plt.savefig('survived_pies.png')
+
+result = {"type": "plot", "value": "survived_pies.png"}
+            ```
+            
+2024-05-30 13:09:38 [INFO] Executing Step 4: CachePopulation
+2024-05-30 13:09:38 [INFO] Executing Step 5: CodeCleaning
+2024-05-30 13:09:38 [INFO] Saving charts to C:\Users\asus0\Documents\PandasAI\PandasAI\exports\charts\temp_chart.png
+2024-05-30 13:09:38 [INFO] 
+Code running:
+```
+result = {}
+survived_df = dfs[0][dfs[0]['embarked_town'] == 'Southampton'][dfs[0]['alive'] == 1]
+plt.figure(figsize=(6, 6))
+plt.pie(survived_df.groupby('adult_male')['alive'].count(), labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+        ```
+2024-05-30 13:09:38 [INFO] Executing Step 6: CodeExecution
+2024-05-30 13:09:38 [ERROR] Failed with error: Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandas\core\indexes\base.py", line 3802, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas\_libs\index.pyx", line 138, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index.pyx", line 165, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 5745, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 5753, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'embarked_town'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 2, in <module>
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandas\core\frame.py", line 3807, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandas\core\indexes\base.py", line 3804, in get_loc
+    raise KeyError(key) from err
+KeyError: 'embarked_town'
+
+2024-05-30 13:09:38 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2024-05-30 13:09:38 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-05-30 13:09:38 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-05-30 13:09:38 [INFO] Using prompt: <dataframe>
+dfs[0]:891x15
+survived,pclass,sex,age,sibsp,parch,fare,embarked,class,who,adult_male,deck,embark_town,alive,alone
+0,1,female,,5,3,71.2833,,First,woman,False,A,Southampton,no,False
+1,2,female,65.0,3,4,20.525,C,Third,child,True,,,yes,True
+0,3,male,33.0,1,5,8.3,Q,Second,man,False,E,Cherbourg,no,True
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ plot pie chart with number of embark town people that survived
+
+You generated this python code:
+result = {}
+survived_df = dfs[0][dfs[0]['embarked_town'] == 'Southampton'][dfs[0]['alive'] == 1]
+plt.figure(figsize=(6, 6))
+plt.pie(survived_df.groupby('adult_male')['alive'].count(), labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandas\core\indexes\base.py", line 3802, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas\_libs\index.pyx", line 138, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index.pyx", line 165, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 5745, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 5753, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'embarked_town'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 2, in <module>
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandas\core\frame.py", line 3807, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandas\core\indexes\base.py", line 3804, in get_loc
+    raise KeyError(key) from err
+KeyError: 'embarked_town'
+
+
+Fix the python code above and return the new python code:
+2024-05-30 13:09:38 [INFO] Executing Step 1: CodeGenerator
+2024-05-30 13:09:47 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-05-30 13:09:47 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:891x15
+survived,pclass,sex,age,sibsp,parch,fare,embarked,class,who,adult_male,deck,embark_town,alive,alone
+0,1,female,,5,3,71.2833,,First,woman,False,A,Southampton,no,False
+1,2,female,65.0,3,4,20.525,C,Third,child,True,,,yes,True
+0,3,male,33.0,1,5,8.3,Q,Second,man,False,E,Cherbourg,no,True
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ plot pie chart with number of embark town people that survived
+
+You generated this python code:
+result = {}
+survived_df = dfs[0][dfs[0]['embarked_town'] == 'Southampton'][dfs[0]['alive'] == 1]
+plt.figure(figsize=(6, 6))
+plt.pie(survived_df.groupby('adult_male')['alive'].count(), labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandas\core\indexes\base.py", line 3802, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas\_libs\index.pyx", line 138, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index.pyx", line 165, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 5745, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 5753, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'embarked_town'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 2, in <module>
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandas\core\frame.py", line 3807, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandas\core\indexes\base.py", line 3804, in get_loc
+    raise KeyError(key) from err
+KeyError: 'embarked_town'
+
+
+Fix the python code above and return the new python code:
+            
+2024-05-30 13:09:47 [INFO] Code generated:
+            ```
+            result = {}
+survived_df = dfs[0][dfs[0]['embarked'] == 'Southampton'][dfs[0]['alive'] == 1]
+plt.figure(figsize=(6, 6))
+plt.pie(survived_df['adult_male'].value_counts()[survived_df['alive'] == 1].values, labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+            ```
+            
+2024-05-30 13:09:47 [INFO] Executing Step 2: CodeCleaning
+2024-05-30 13:09:47 [INFO] Saving charts to C:\Users\asus0\Documents\PandasAI\PandasAI\exports\charts\temp_chart.png
+2024-05-30 13:09:47 [INFO] 
+Code running:
+```
+result = {}
+survived_df = dfs[0][dfs[0]['embarked'] == 'Southampton'][dfs[0]['alive'] == 1]
+plt.figure(figsize=(6, 6))
+plt.pie(survived_df['adult_male'].value_counts()[survived_df['alive'] == 1].values, labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+        ```
+2024-05-30 13:09:47 [ERROR] Failed with error: Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 4, in <module>
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\pyplot.py", line 3546, in pie
+    return gca().pie(
+           ^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\__init__.py", line 1465, in inner
+    return func(ax, *map(sanitize_sequence, args), **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\axes\_axes.py", line 3237, in pie
+    raise ValueError("'label' must be of length 'x'")
+ValueError: 'label' must be of length 'x'
+
+2024-05-30 13:09:47 [WARNING] Failed to execute code retrying with a correction framework [retry number: 2]
+2024-05-30 13:09:47 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-05-30 13:09:47 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-05-30 13:09:47 [INFO] Using prompt: <dataframe>
+dfs[0]:891x15
+survived,pclass,sex,age,sibsp,parch,fare,embarked,class,who,adult_male,deck,embark_town,alive,alone
+0,1,female,,5,3,71.2833,,First,woman,False,A,Southampton,no,False
+1,2,female,65.0,3,4,20.525,C,Third,child,True,,,yes,True
+0,3,male,33.0,1,5,8.3,Q,Second,man,False,E,Cherbourg,no,True
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ plot pie chart with number of embark town people that survived
+
+You generated this python code:
+result = {}
+survived_df = dfs[0][dfs[0]['embarked'] == 'Southampton'][dfs[0]['alive'] == 1]
+plt.figure(figsize=(6, 6))
+plt.pie(survived_df['adult_male'].value_counts()[survived_df['alive'] == 1].values, labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 4, in <module>
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\pyplot.py", line 3546, in pie
+    return gca().pie(
+           ^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\__init__.py", line 1465, in inner
+    return func(ax, *map(sanitize_sequence, args), **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\axes\_axes.py", line 3237, in pie
+    raise ValueError("'label' must be of length 'x'")
+ValueError: 'label' must be of length 'x'
+
+
+Fix the python code above and return the new python code:
+2024-05-30 13:09:47 [INFO] Executing Step 1: CodeGenerator
+2024-05-30 13:09:59 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-05-30 13:09:59 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:891x15
+survived,pclass,sex,age,sibsp,parch,fare,embarked,class,who,adult_male,deck,embark_town,alive,alone
+0,1,female,,5,3,71.2833,,First,woman,False,A,Southampton,no,False
+1,2,female,65.0,3,4,20.525,C,Third,child,True,,,yes,True
+0,3,male,33.0,1,5,8.3,Q,Second,man,False,E,Cherbourg,no,True
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ plot pie chart with number of embark town people that survived
+
+You generated this python code:
+result = {}
+survived_df = dfs[0][dfs[0]['embarked'] == 'Southampton'][dfs[0]['alive'] == 1]
+plt.figure(figsize=(6, 6))
+plt.pie(survived_df['adult_male'].value_counts()[survived_df['alive'] == 1].values, labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 4, in <module>
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\pyplot.py", line 3546, in pie
+    return gca().pie(
+           ^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\__init__.py", line 1465, in inner
+    return func(ax, *map(sanitize_sequence, args), **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\axes\_axes.py", line 3237, in pie
+    raise ValueError("'label' must be of length 'x'")
+ValueError: 'label' must be of length 'x'
+
+
+Fix the python code above and return the new python code:
+            
+2024-05-30 13:09:59 [INFO] Code generated:
+            ```
+            import matplotlib.pyplot as plt
+
+result = {}
+survived_df = dfs[0][dfs[0]['embarked'] == 'Southampton'][dfs[0]['alive'] == 1]
+male_survivors = survived_df['sex'].value_counts()[survived_df['alive'] == 1].values
+female_survivors = len(survived_df) - sum(male_survivors)
+
+plt.figure(figsize=(6, 6))
+plt.pie([len(male_survivors), female_survivors], labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+            ```
+            
+2024-05-30 13:09:59 [INFO] Executing Step 2: CodeCleaning
+2024-05-30 13:09:59 [INFO] Saving charts to C:\Users\asus0\Documents\PandasAI\PandasAI\exports\charts\temp_chart.png
+2024-05-30 13:09:59 [INFO] 
+Code running:
+```
+result = {}
+survived_df = dfs[0][dfs[0]['embarked'] == 'Southampton'][dfs[0]['alive'] == 1]
+male_survivors = survived_df['sex'].value_counts()[survived_df['alive'] == 1].values
+female_survivors = len(survived_df) - sum(male_survivors)
+plt.figure(figsize=(6, 6))
+plt.pie([len(male_survivors), female_survivors], labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+        ```
+2024-05-30 13:09:59 [ERROR] Failed with error: Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 6, in <module>
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\pyplot.py", line 3546, in pie
+    return gca().pie(
+           ^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\__init__.py", line 1465, in inner
+    return func(ax, *map(sanitize_sequence, args), **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\axes\_axes.py", line 3273, in pie
+    w = mpatches.Wedge((x, y), radius, 360. * min(theta1, theta2),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\patches.py", line 1198, in __init__
+    self._recompute_path()
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\patches.py", line 1210, in _recompute_path
+    arc = Path.arc(theta1, theta2)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\path.py", line 958, in arc
+    n = int(2 ** np.ceil((eta2 - eta1) / halfpi))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+2024-05-30 13:09:59 [WARNING] Failed to execute code retrying with a correction framework [retry number: 3]
+2024-05-30 13:09:59 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-05-30 13:09:59 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-05-30 13:09:59 [INFO] Using prompt: <dataframe>
+dfs[0]:891x15
+survived,pclass,sex,age,sibsp,parch,fare,embarked,class,who,adult_male,deck,embark_town,alive,alone
+0,1,female,,5,3,71.2833,,First,woman,False,A,Southampton,no,False
+1,2,female,65.0,3,4,20.525,C,Third,child,True,,,yes,True
+0,3,male,33.0,1,5,8.3,Q,Second,man,False,E,Cherbourg,no,True
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ plot pie chart with number of embark town people that survived
+
+You generated this python code:
+result = {}
+survived_df = dfs[0][dfs[0]['embarked'] == 'Southampton'][dfs[0]['alive'] == 1]
+male_survivors = survived_df['sex'].value_counts()[survived_df['alive'] == 1].values
+female_survivors = len(survived_df) - sum(male_survivors)
+plt.figure(figsize=(6, 6))
+plt.pie([len(male_survivors), female_survivors], labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 6, in <module>
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\pyplot.py", line 3546, in pie
+    return gca().pie(
+           ^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\__init__.py", line 1465, in inner
+    return func(ax, *map(sanitize_sequence, args), **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\axes\_axes.py", line 3273, in pie
+    w = mpatches.Wedge((x, y), radius, 360. * min(theta1, theta2),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\patches.py", line 1198, in __init__
+    self._recompute_path()
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\patches.py", line 1210, in _recompute_path
+    arc = Path.arc(theta1, theta2)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\path.py", line 958, in arc
+    n = int(2 ** np.ceil((eta2 - eta1) / halfpi))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+
+Fix the python code above and return the new python code:
+2024-05-30 13:09:59 [INFO] Executing Step 1: CodeGenerator
+2024-05-30 13:10:09 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-05-30 13:10:09 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:891x15
+survived,pclass,sex,age,sibsp,parch,fare,embarked,class,who,adult_male,deck,embark_town,alive,alone
+0,1,female,,5,3,71.2833,,First,woman,False,A,Southampton,no,False
+1,2,female,65.0,3,4,20.525,C,Third,child,True,,,yes,True
+0,3,male,33.0,1,5,8.3,Q,Second,man,False,E,Cherbourg,no,True
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ plot pie chart with number of embark town people that survived
+
+You generated this python code:
+result = {}
+survived_df = dfs[0][dfs[0]['embarked'] == 'Southampton'][dfs[0]['alive'] == 1]
+male_survivors = survived_df['sex'].value_counts()[survived_df['alive'] == 1].values
+female_survivors = len(survived_df) - sum(male_survivors)
+plt.figure(figsize=(6, 6))
+plt.pie([len(male_survivors), female_survivors], labels=['Male', 'Female'], autopct='%1.1f%%')
+plt.title('Number of Adult Males and Females that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 6, in <module>
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\pyplot.py", line 3546, in pie
+    return gca().pie(
+           ^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\__init__.py", line 1465, in inner
+    return func(ax, *map(sanitize_sequence, args), **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\axes\_axes.py", line 3273, in pie
+    w = mpatches.Wedge((x, y), radius, 360. * min(theta1, theta2),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\patches.py", line 1198, in __init__
+    self._recompute_path()
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\patches.py", line 1210, in _recompute_path
+    arc = Path.arc(theta1, theta2)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\matplotlib\path.py", line 958, in arc
+    n = int(2 ** np.ceil((eta2 - eta1) / halfpi))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+
+Fix the python code above and return the new python code:
+            
+2024-05-30 13:10:09 [INFO] Code generated:
+            ```
+            import pandas as pd
+import matplotlib.pyplot as plt
+
+dfs = pd.read_csv(StringIO(your_data))
+
+survived_df = dfs[dfs['embarked'] == 'Southampton'][dfs['alive'] == 1]
+
+male_survivors = survived_df[survived_df['sex'] == 'female'].shape[0]
+female_survivors = len(survived_df) - male_survivors
+
+plt.figure(figsize=(6, 6))
+plt.pie([male_survivors, female_survivors], labels=['Female', 'Male'], autopct='%1.1f%%')
+plt.title('Number of Adult Females and Males that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+            ```
+            
+2024-05-30 13:10:09 [INFO] Executing Step 2: CodeCleaning
+2024-05-30 13:10:09 [INFO] Saving charts to C:\Users\asus0\Documents\PandasAI\PandasAI\exports\charts\temp_chart.png
+2024-05-30 13:10:09 [INFO] 
+Code running:
+```
+survived_df = dfs[dfs['embarked'] == 'Southampton'][dfs['alive'] == 1]
+male_survivors = survived_df[survived_df['sex'] == 'female'].shape[0]
+female_survivors = len(survived_df) - male_survivors
+plt.figure(figsize=(6, 6))
+plt.pie([male_survivors, female_survivors], labels=['Female', 'Male'], autopct='%1.1f%%')
+plt.title('Number of Adult Females and Males that Survived from Southampton')
+plt.savefig('C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': 'C:/Users/asus0/Documents/PandasAI/PandasAI/exports/charts/temp_chart.png'}
+        ```
+2024-05-30 13:10:09 [ERROR] Failed with error: Traceback (most recent call last):
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus0\anaconda3\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+TypeError: list indices must be integers or slices, not str
+
+2024-05-30 13:10:09 [ERROR] Pipeline failed on step 6: list indices must be integers or slices, not str
