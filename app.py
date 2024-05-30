@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 model = LocalLLM(
-    api_base='http://localhost:11434/v1',
+    # api_base='http://localhost:11434/v1',
+    api_base=' http://localhost:11434/api/chat',
     model="llama3:latest"
 )
 
